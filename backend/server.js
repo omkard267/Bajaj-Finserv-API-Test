@@ -109,7 +109,11 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'OK', message: 'Server is running' });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-  console.log(`API endpoint: http://localhost:${PORT}/bfhl`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+    console.log(`API endpoint: http://localhost:${PORT}/bfhl`);
+  });
+}
+
+module.exports = app;
